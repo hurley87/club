@@ -1,6 +1,5 @@
 import { BigNumber } from "@ethersproject/bignumber"
 import { Contract } from "@ethersproject/contracts"
-import { formatUnits } from "@ethersproject/units"
 import { useWeb3React } from "@web3-react/core"
 import useContract from "hooks/useContract"
 import MERKLE_VESTING_ABI from "static/abis/MerkleVestingAbi.json"
@@ -15,12 +14,7 @@ const getClaimableAmount =
     fullAmount: string
   ) =>
   (): Promise<BigNumber> =>
-    contract.getClaimableAmount(
-      cohortId,
-      index,
-      account,
-      parseInt(formatUnits(fullAmount))
-    )
+    contract.getClaimableAmount(cohortId, index, account, fullAmount)
 
 const useClaimableAmount = (cohortId: string, index: number, fullAmount: string) => {
   const { active, account, chainId } = useWeb3React()

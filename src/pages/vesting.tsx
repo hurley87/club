@@ -54,7 +54,7 @@ const VestingPage = (): JSX.Element => {
     useClaimableAmount(usersLatestCohort, claimData?.index, claimData?.amount)
 
   const claimableToday = useMemo(
-    () => parseInt(formatUnits(claimableAmount || 0, 0)),
+    () => parseInt(formatUnits(claimableAmount || 0, 18)),
     [claimableAmount]
   )
 
