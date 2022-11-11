@@ -13,7 +13,7 @@ import {
   useBreakpointValue,
   VStack,
 } from "@chakra-ui/react"
-import { formatUnits } from "@ethersproject/units"
+import { commify, formatUnits } from "@ethersproject/units"
 import { useWeb3React } from "@web3-react/core"
 import PageContent from "components/common/PageContent"
 import useClaim from "components/vesting/hooks/useClaim"
@@ -54,7 +54,7 @@ const VestingPage = (): JSX.Element => {
     useClaimableAmount(usersLatestCohort, claimData?.index, claimData?.amount)
 
   const claimableToday = useMemo(
-    () => parseInt(formatUnits(claimableAmount || 0, 0)),
+    () => commify(parseInt(formatUnits(claimableAmount || 0, 18))),
     [claimableAmount]
   )
 
@@ -167,7 +167,7 @@ const VestingPage = (): JSX.Element => {
                 mb={{ base: 0.5, sm: 2 }}
                 pt={8}
                 gap={2}
-                gridTemplateColumns={{ base: "70% 30%", sm: "65% 35%" }}
+                gridTemplateColumns={{ base: "70% 30%", sm: "60% 40%" }}
                 fontSize={{ base: "1.25rem", sm: "2.25rem" }}
                 fontFamily="heading"
                 lineHeight={{ base: 2, sm: 1.5 }}
@@ -175,8 +175,8 @@ const VestingPage = (): JSX.Element => {
                 <Text as="span" width="full" textAlign="right">
                   Total tokens in vesting:
                 </Text>
-                <Text as="span" textAlign="left">{`${parseInt(
-                  formatUnits(claimData?.amount || 0)
+                <Text as="span" textAlign="left">{`${commify(
+                  parseInt(formatUnits(claimData?.amount || 0))
                 )} $${tokenSymbol}`}</Text>
               </SimpleGrid>
               <SimpleGrid
@@ -202,7 +202,7 @@ const VestingPage = (): JSX.Element => {
               px={16}
               letterSpacing="wide"
               colorScheme="seedclub"
-              isDisabled={ended || claimableToday === 0}
+              isDisabled={ended || parseInt(claimableToday?.toString()) === 0}
               isLoading={isClaimLoading}
               loadingText="Claiming"
               onClick={onClaimSubmit}

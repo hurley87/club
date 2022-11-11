@@ -11,7 +11,11 @@ import "theme/custom-scrollbar.css"
 const getLibrary = (provider: ExternalProvider | JsonRpcFetchFunc) =>
   new Web3Provider(provider)
 
-const App = ({ Component, pageProps }: AppProps): JSX.Element => (
+interface CustomAppProps {
+  cookies: any
+}
+
+const App = ({ Component, pageProps }: AppProps<CustomAppProps>): JSX.Element => (
   <Chakra cookies={pageProps.cookies}>
     <IconContext.Provider
       value={{
