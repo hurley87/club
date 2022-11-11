@@ -202,7 +202,7 @@ const VestingPage = (): JSX.Element => {
               px={16}
               letterSpacing="wide"
               colorScheme="seedclub"
-              isDisabled={ended || claimableToday === 0}
+              isDisabled={ended || parseInt(claimableToday?.toString()) === 0}
               isLoading={isClaimLoading}
               loadingText="Claiming"
               onClick={onClaimSubmit}
