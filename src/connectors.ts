@@ -6,13 +6,17 @@ enum Chains {
   GOERLI = 5,
 }
 
+const ALCHEMY_ID = process.env.NEXT_PUBLIC_ALCHEMY_ID || ""
+
 const RPC = {
   ETHEREUM: {
     chainName: "Ethereum",
     blockExplorerUrls: ["https://etherscan.io/"],
     iconUrls: ["/networkLogos/ethereum.svg"],
     rpcUrls: [
-      "https://eth-mainnet.alchemyapi.io/v2/yiNnGigifqu96_5ys970MfkDBl2z2Or9",
+      `https://eth-mainnet.alchemyapi.io/v2/${
+        ALCHEMY_ID || "yiNnGigifqu96_5ys970MfkDBl2z2Or9"
+      }`,
     ],
   },
   GOERLI: {
